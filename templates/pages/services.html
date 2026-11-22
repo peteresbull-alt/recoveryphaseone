@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Services · Vaultreck{% endblock %}
+{% block og_title %}Services · Vaultreck{% endblock %}
+{% block og_description %}Fund recovery and financial investigation services: crypto tracing, investment scam recovery, romance fraud investigation, wire fraud response, blockchain forensics and more.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto max-w-3xl">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Services</p>
+    <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">Specialist investigation for every stage of fraud recovery.</h1>
+    <p class="text-white/60 text-lg leading-relaxed">
+      From the first trace of a stolen wallet to litigation support years later, our services span
+      the full lifecycle of a fraud case.
+    </p>
+  </div>
+</section>
+
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for service in services %}
+    <a href="{% url 'service_detail' service.slug %}" class="group bg-white border border-ink-950/10 rounded-2xl p-8 hover:border-cargo-500/40 hover:shadow-xl transition-all duration-300 flex flex-col">
+      <div class="w-16 h-16 rounded-xl bg-ink-950/[0.04] group-hover:bg-cargo-500/15 flex items-center justify-center mb-6 transition-colors">
+        <i class="ph-duotone ph-{{ service.icon }} text-3xl text-ink-700 group-hover:text-cargo-600 transition-colors" aria-hidden="true"></i>
+      </div>
+      <h2 class="font-display text-xl font-bold text-ink-950 mb-3 group-hover:text-cargo-700 transition-colors">{{ service.name }}</h2>
+      <p class="text-sm text-ink-950/55 leading-relaxed mb-6 flex-1">{{ service.summary }}</p>
+      <span class="text-sm font-bold text-cargo-700 inline-flex items-center">Learn more <i class="ph-duotone ph-arrow-right ml-1.5 text-xs transition-transform group-hover:translate-x-1" aria-hidden="true"></i></span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}

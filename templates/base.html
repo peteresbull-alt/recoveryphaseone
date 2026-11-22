@@ -1,0 +1,47 @@
+{% load static %}<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    {% include 'partials/head.html' %}
+    <title>{% block title %}Vaultreck — Fund Recovery & Financial Investigations{% endblock %}</title>
+
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
+    <meta property="og:site_name" content="Vaultreck" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% block og_title %}Vaultreck — Fund Recovery & Financial Investigations{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}Vaultreck traces and pursues recovery of money lost to investment scams, crypto fraud, romance scams and payment fraud through lawful, coordinated investigation.{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80{% endblock %}" />
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Vaultreck",
+      "description": "Fund recovery and financial investigations firm specialising in tracing and pursuing recovery of money lost to fraud.",
+      "url": "{{ request.scheme }}://{{ request.get_host }}",
+      "sameAs": []
+    }
+    </script>
+
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body class="font-sans bg-white text-ink-950 overflow-x-hidden min-h-full">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    {% include 'partials/topbar.html' %}
+    {% include 'partials/header.html' %}
+
+    <main id="main-content">
+      {% block breadcrumbs %}{% endblock %}
+      {% block content %}{% endblock %}
+    </main>
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/cookie_banner.html' %}
+
+    <script src="{% static 'js/site.js' %}" defer></script>
+    {% include 'partials/scripts_base.html' %}
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

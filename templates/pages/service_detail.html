@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ service.name }} · Vaultreck{% endblock %}
+{% block og_title %}{{ service.name }} · Vaultreck{% endblock %}
+{% block og_description %}{{ service.summary }}{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="max-w-3xl">
+      <div class="w-20 h-20 rounded-2xl bg-cargo-500/15 flex items-center justify-center mb-6">
+        <i class="ph-duotone ph-{{ service.icon }} text-4xl text-cargo-400" aria-hidden="true"></i>
+      </div>
+      <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Service</p>
+      <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">{{ service.name }}</h1>
+      <p class="text-white/65 text-lg leading-relaxed">{{ service.hero_description }}</p>
+      <a href="{% url 'report_fraud' %}" class="inline-flex items-center mt-8 px-7 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">
+        Start a Free Case Review
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1000px] mx-auto">
+    <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-6">Overview</h2>
+    <div class="space-y-5 text-ink-950/65 leading-relaxed text-base">
+      {% for paragraph in service.overview %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE HELP -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-ink-950/[0.02]">
+  <div class="max-w-[1000px] mx-auto">
+    <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-8">How We Help</h2>
+    <ul class="grid sm:grid-cols-2 gap-4">
+      {% for item in service.how_we_help %}
+      <li class="flex items-start gap-3 bg-white border border-ink-950/10 rounded-xl p-5">
+        <i class="ph-duotone ph-check-circle text-cargo-600 text-xl flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+        <span class="text-sm text-ink-950/75 leading-relaxed">{{ item }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1200px] mx-auto">
+    <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-12">Our Process</h2>
+    {% include 'partials/process_steps.html' with steps=service.process %}
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-ink-950/[0.02]">
+  <div class="max-w-[800px] mx-auto">
+    <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-8">Frequently Asked Questions</h2>
+    {% include 'partials/accordion.html' with faqs=service.faqs %}
+  </div>
+</section>
+
+<!-- RELATED SERVICES -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto">
+    <h2 class="text-2xl font-display font-bold text-ink-950 mb-8">Related Services</h2>
+    <div class="grid sm:grid-cols-3 gap-5">
+      {% for related in related_services %}
+      <a href="{% url 'service_detail' related.slug %}" class="group bg-white border border-ink-950/10 rounded-2xl p-6 hover:border-cargo-500/40 hover:shadow-lg transition-all">
+        <div class="w-14 h-14 rounded-xl bg-ink-950/[0.04] group-hover:bg-cargo-500/15 flex items-center justify-center mb-4 transition-colors">
+          <i class="ph-duotone ph-{{ related.icon }} text-2xl text-ink-700 group-hover:text-cargo-600 transition-colors" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 text-sm group-hover:text-cargo-700 transition-colors">{{ related.name }}</h3>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}

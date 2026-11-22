@@ -1,0 +1,106 @@
+<footer class="bg-ink-950 text-white/60">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10 pt-16 lg:pt-20 pb-10">
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-6 gap-10 pb-14 border-b border-white/10">
+      <div class="lg:col-span-2">
+        <span class="font-display font-bold text-xl text-white">VAULT<span class="text-cargo-400">RECK</span></span>
+        <p class="text-sm text-white/45 mt-4 leading-relaxed max-w-xs">
+          Fund recovery and financial investigations. We trace, investigate and pursue recovery of
+          money lost to fraud through lawful, coordinated action.
+        </p>
+        <div class="flex items-center gap-3 mt-6">
+          <a href="#" aria-label="Vaultreck on LinkedIn" class="w-10 h-10 rounded-xl border border-white/15 flex items-center justify-center hover:border-cargo-400 hover:text-cargo-400 transition-colors"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Vaultreck on X" class="w-10 h-10 rounded-xl border border-white/15 flex items-center justify-center hover:border-cargo-400 hover:text-cargo-400 transition-colors"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Services</h3>
+        <ul class="space-y-2.5 text-sm">
+          {% for service in nav_services %}
+          <li><a href="{% url 'service_detail' service.slug %}" class="hover:text-cargo-400 transition-colors">{{ service.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Industries</h3>
+        <ul class="space-y-2.5 text-sm">
+          {% for industry in nav_industries %}
+          <li><a href="{% url 'industry_detail' industry.slug %}" class="hover:text-cargo-400 transition-colors">{{ industry.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Insights</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="{% url 'insights' %}" class="hover:text-cargo-400 transition-colors">All Insights</a></li>
+          {% for category in insight_categories %}
+          <li><a href="{% url 'insights' %}?category={{ category|urlencode }}" class="hover:text-cargo-400 transition-colors">{{ category }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Company</h3>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="{% url 'about' %}" class="hover:text-cargo-400 transition-colors">About Us</a></li>
+          <li><a href="{% url 'careers' %}" class="hover:text-cargo-400 transition-colors">Careers</a></li>
+          <li><a href="{% url 'contact' %}" class="hover:text-cargo-400 transition-colors">Contact</a></li>
+          <li><a href="{% url 'faq' %}" class="hover:text-cargo-400 transition-colors">FAQ</a></li>
+          <li><a href="{% url 'report_fraud' %}" class="hover:text-cargo-400 transition-colors">Report a Fraud</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10 border-b border-white/10">
+      {% for office in offices %}
+      <div class="flex items-start gap-3">
+        <i class="ph-duotone ph-map-pin text-cargo-400 text-lg mt-0.5" aria-hidden="true"></i>
+        <div class="text-sm">
+          <p class="font-bold text-white">{{ office.city }}</p>
+          <p class="text-white/45">{{ office.address }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="py-6 border-b border-white/10 flex items-center gap-3">
+      <i class="ph-duotone ph-envelope-simple text-cargo-400 text-lg" aria-hidden="true"></i>
+      <a href="mailto:{{ support_email }}" class="text-sm font-semibold text-white hover:text-cargo-400 transition-colors">{{ support_email }}</a>
+    </div>
+
+    <div class="py-10 border-b border-white/10 grid lg:grid-cols-2 gap-6 items-center">
+      <div>
+        <h3 class="text-sm font-bold text-white mb-1">Stay informed on emerging fraud trends</h3>
+        <p class="text-sm text-white/45">Scam alerts and investigation insights — no spam, unsubscribe anytime.</p>
+      </div>
+      <form class="flex flex-col sm:flex-row gap-3" action="#" method="post">
+        <label for="footer-newsletter-email" class="sr-only">Email address</label>
+        <input id="footer-newsletter-email" type="email" required placeholder="you@email.com"
+          class="flex-1 rounded-xl bg-white/5 border border-white/15 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-cargo-400" />
+        <button type="submit" class="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors whitespace-nowrap">
+          Subscribe
+        </button>
+      </form>
+    </div>
+
+    <div class="pt-8 flex flex-col gap-4">
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-xs">
+        <a href="{% url 'legal_page' 'privacy-policy' %}" class="hover:text-cargo-400 transition-colors">Privacy Policy</a>
+        <a href="{% url 'legal_page' 'terms-of-use' %}" class="hover:text-cargo-400 transition-colors">Terms of Use</a>
+        <a href="{% url 'legal_page' 'cookie-policy' %}" class="hover:text-cargo-400 transition-colors">Cookie Policy</a>
+        <a href="{% url 'legal_page' 'disclaimer' %}" class="hover:text-cargo-400 transition-colors">Disclaimer</a>
+        <a href="{% url 'legal_page' 'complaints-procedure' %}" class="hover:text-cargo-400 transition-colors">Complaints Procedure</a>
+      </div>
+      <p class="text-[11px] text-white/35 leading-relaxed max-w-4xl">
+        Vaultreck is a fund recovery and financial investigations firm. [Registered entity name,
+        registration number, licensing body and jurisdiction to be added here once confirmed.]
+        Vaultreck does not provide legal, financial or investment advice, and does not guarantee
+        the recovery of any funds.
+      </p>
+      <p class="text-[11px] text-white/25">&copy; {% now "Y" %} Vaultreck. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

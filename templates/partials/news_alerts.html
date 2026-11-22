@@ -1,0 +1,43 @@
+{% comment %}
+Usage: {% include 'partials/news_alerts.html' with news_alerts=news_alerts %}
+Optional: pass show_view_all=True to add a "View all" link to the Insights hub
+(use on pages other than the hub itself, e.g. Home).
+{% endcomment %}
+{% if news_alerts %}
+<section class="py-16 lg:py-20 px-6 lg:px-10 bg-ink-950/[0.02] border-b border-ink-950/10">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-2">
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-60"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+        </span>
+        <h2 class="text-2xl font-display font-bold text-ink-950">Live Scam &amp; Fraud Alerts</h2>
+      </div>
+      {% if show_view_all %}
+      <a href="{% url 'insights' %}?category=Scam%20Alerts" class="text-sm font-bold text-cargo-700 hover:text-cargo-600 inline-flex items-center">View all <i class="ph-duotone ph-arrow-right ml-1.5 text-xs" aria-hidden="true"></i></a>
+      {% endif %}
+    </div>
+    <p class="text-sm text-ink-950/45 mb-10 max-w-2xl">
+      Recent third-party news coverage of fraud and scams, pulled automatically from public news
+      sources. These are external reports, not written or verified by Vaultreck — follow the link
+      to read the full story at its original source.
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for item in news_alerts %}
+      <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="group bg-white border border-ink-950/10 rounded-2xl p-6 hover:border-cargo-500/40 hover:shadow-lg transition-all duration-300 flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-cargo-700">{{ item.source }}</span>
+          {% if item.published_at %}
+          <span class="text-ink-950/20" aria-hidden="true">&middot;</span>
+          <span class="text-[11px] text-ink-950/40">{{ item.published_at|date:"M d, Y" }}</span>
+          {% endif %}
+        </div>
+        <h3 class="font-display text-base font-bold text-ink-950 leading-snug mb-2 group-hover:text-cargo-700 transition-colors flex-1">{{ item.title }}</h3>
+        <span class="text-xs font-bold text-cargo-700 inline-flex items-center mt-2">Read at source <i class="ph-duotone ph-arrow-square-out ml-1.5 text-xs" aria-hidden="true"></i></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

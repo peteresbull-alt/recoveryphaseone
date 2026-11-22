@@ -1,0 +1,145 @@
+<header id="site-header" class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-ink-950/10 transition-all duration-300">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <div class="flex items-center justify-between h-20 header-inner transition-all duration-300">
+
+      <a href="{% url 'home' %}" class="flex items-center gap-2 flex-shrink-0" aria-label="Vaultreck home">
+        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="34" height="34" rx="6" fill="#04070F"/>
+          <path d="M9 10H13.5L17 20.5L20.5 10H25L19 25H15L9 10Z" fill="#F59E0B"/>
+        </svg>
+        <span class="font-display font-bold text-xl tracking-tight text-ink-950">VAULT<span class="text-cargo-600">RECK</span></span>
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
+        <div class="relative" data-megamenu-wrapper>
+          <button type="button" data-megamenu-trigger aria-expanded="false" aria-controls="megamenu-services"
+            class="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-ink-950/80 hover:text-ink-950 rounded-lg transition-colors">
+            Services <i class="ph-duotone ph-caret-down text-[10px] transition-transform" aria-hidden="true"></i>
+          </button>
+          <div id="megamenu-services" class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[720px] max-w-[90vw] bg-white border border-ink-950/10 shadow-2xl rounded-2xl p-8">
+            <div class="grid grid-cols-2 gap-x-8 gap-y-5">
+              {% for service in nav_services %}
+              <a href="{% url 'service_detail' service.slug %}" class="group flex items-start gap-3">
+                <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-ink-950/[0.04] flex items-center justify-center group-hover:bg-cargo-500/15 transition-colors">
+                  <i class="ph-duotone ph-{{ service.icon }} text-xl text-ink-700 group-hover:text-cargo-600 transition-colors" aria-hidden="true"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-ink-950 group-hover:text-cargo-700 transition-colors">{{ service.name }}</p>
+                  <p class="text-xs text-ink-950/45 mt-0.5 leading-snug">{{ service.summary }}</p>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+            <div class="mt-6 pt-5 border-t border-ink-950/10">
+              <a href="{% url 'services' %}" class="text-sm font-bold text-cargo-700 hover:text-cargo-600">View all services <i class="ph-duotone ph-arrow-right ml-1 text-xs" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative" data-megamenu-wrapper>
+          <button type="button" data-megamenu-trigger aria-expanded="false" aria-controls="megamenu-industries"
+            class="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-ink-950/80 hover:text-ink-950 rounded-lg transition-colors">
+            Industries <i class="ph-duotone ph-caret-down text-[10px]" aria-hidden="true"></i>
+          </button>
+          <div id="megamenu-industries" class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[640px] max-w-[90vw] bg-white border border-ink-950/10 shadow-2xl rounded-2xl p-8">
+            <div class="grid grid-cols-2 gap-x-8 gap-y-5">
+              {% for industry in nav_industries %}
+              <a href="{% url 'industry_detail' industry.slug %}" class="group flex items-start gap-3">
+                <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-ink-950/[0.04] flex items-center justify-center group-hover:bg-cargo-500/15 transition-colors">
+                  <i class="ph-duotone ph-{{ industry.icon }} text-xl text-ink-700 group-hover:text-cargo-600 transition-colors" aria-hidden="true"></i>
+                </div>
+                <p class="text-sm font-bold text-ink-950 group-hover:text-cargo-700 transition-colors pt-1.5">{{ industry.name }}</p>
+              </a>
+              {% endfor %}
+            </div>
+            <div class="mt-6 pt-5 border-t border-ink-950/10">
+              <a href="{% url 'industries' %}" class="text-sm font-bold text-cargo-700 hover:text-cargo-600">View all industries <i class="ph-duotone ph-arrow-right ml-1 text-xs" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative" data-megamenu-wrapper>
+          <button type="button" data-megamenu-trigger aria-expanded="false" aria-controls="megamenu-insights"
+            class="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-ink-950/80 hover:text-ink-950 rounded-lg transition-colors">
+            Insights <i class="ph-duotone ph-caret-down text-[10px]" aria-hidden="true"></i>
+          </button>
+          <div id="megamenu-insights" class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[520px] max-w-[90vw] bg-white border border-ink-950/10 shadow-2xl rounded-2xl p-8">
+            <p class="text-xs font-bold text-ink-950/40 uppercase tracking-wider mb-3">Browse by category</p>
+            <div class="grid grid-cols-2 gap-2 mb-6">
+              {% for category in insight_categories %}
+              <a href="{% url 'insights' %}?category={{ category|urlencode }}" class="text-sm font-semibold text-ink-950/80 hover:text-cargo-700 px-3 py-2 rounded-lg hover:bg-ink-950/[0.03] transition-colors">{{ category }}</a>
+              {% endfor %}
+            </div>
+            <div class="pt-5 border-t border-ink-950/10">
+              <a href="{% url 'insights' %}" class="text-sm font-bold text-cargo-700 hover:text-cargo-600">Visit the Insights hub <i class="ph-duotone ph-arrow-right ml-1 text-xs" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <a href="{% url 'about' %}" class="px-4 py-2 text-sm font-semibold text-ink-950/80 hover:text-ink-950 rounded-lg transition-colors">About</a>
+        <a href="{% url 'careers' %}" class="px-4 py-2 text-sm font-semibold text-ink-950/80 hover:text-ink-950 rounded-lg transition-colors">Careers</a>
+        <a href="{% url 'contact' %}" class="px-4 py-2 text-sm font-semibold text-ink-950/80 hover:text-ink-950 rounded-lg transition-colors">Contact</a>
+      </nav>
+
+      <div class="hidden lg:block flex-shrink-0">
+        <a href="{% url 'report_fraud' %}" class="inline-flex items-center px-5 py-2.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">
+          Get Help Now
+        </a>
+      </div>
+
+      <!-- MOBILE TOGGLE -->
+      <button id="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu" class="lg:hidden w-10 h-10 flex items-center justify-center text-ink-950">
+        <i class="ph-duotone ph-list text-2xl" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE FULL-SCREEN NAV -->
+<div id="mobile-nav" class="mobile-nav fixed inset-0 z-[60] bg-white lg:hidden" aria-label="Mobile navigation">
+  <div class="flex items-center justify-between h-20 px-6 border-b border-ink-950/10">
+    <span class="font-display font-bold text-xl text-ink-950">VAULT<span class="text-cargo-600">RECK</span></span>
+    <button type="button" id="mobile-nav-close" aria-label="Close menu" class="w-10 h-10 flex items-center justify-center text-ink-950" onclick="document.getElementById('mobile-nav').classList.remove('open'); document.getElementById('mobile-nav-toggle').setAttribute('aria-expanded','false'); document.body.classList.remove('overflow-hidden');">
+      <i class="ph-duotone ph-x text-2xl" aria-hidden="true"></i>
+    </button>
+  </div>
+  <nav class="px-6 py-6 overflow-y-auto h-[calc(100%-5rem)]" aria-label="Mobile primary">
+    <div class="border-b border-ink-950/10 py-2">
+      <button type="button" data-mobile-submenu-toggle aria-expanded="false" class="w-full flex items-center justify-between py-3 text-left font-bold text-ink-950">
+        Services <i class="ph-duotone ph-caret-down text-xs" aria-hidden="true"></i>
+      </button>
+      <div class="hidden pb-3 pl-2 space-y-1">
+        {% for service in nav_services %}
+        <a href="{% url 'service_detail' service.slug %}" class="block py-2 text-sm text-ink-950/70">{{ service.name }}</a>
+        {% endfor %}
+        <a href="{% url 'services' %}" class="block py-2 text-sm font-bold text-cargo-700">View all services</a>
+      </div>
+    </div>
+    <div class="border-b border-ink-950/10 py-2">
+      <button type="button" data-mobile-submenu-toggle aria-expanded="false" class="w-full flex items-center justify-between py-3 text-left font-bold text-ink-950">
+        Industries <i class="ph-duotone ph-caret-down text-xs" aria-hidden="true"></i>
+      </button>
+      <div class="hidden pb-3 pl-2 space-y-1">
+        {% for industry in nav_industries %}
+        <a href="{% url 'industry_detail' industry.slug %}" class="block py-2 text-sm text-ink-950/70">{{ industry.name }}</a>
+        {% endfor %}
+        <a href="{% url 'industries' %}" class="block py-2 text-sm font-bold text-cargo-700">View all industries</a>
+      </div>
+    </div>
+    <div class="border-b border-ink-950/10 py-2">
+      <button type="button" data-mobile-submenu-toggle aria-expanded="false" class="w-full flex items-center justify-between py-3 text-left font-bold text-ink-950">
+        Insights <i class="ph-duotone ph-caret-down text-xs" aria-hidden="true"></i>
+      </button>
+      <div class="hidden pb-3 pl-2 space-y-1">
+        {% for category in insight_categories %}
+        <a href="{% url 'insights' %}?category={{ category|urlencode }}" class="block py-2 text-sm text-ink-950/70">{{ category }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <a href="{% url 'about' %}" class="block py-4 border-b border-ink-950/10 font-bold text-ink-950">About</a>
+    <a href="{% url 'careers' %}" class="block py-4 border-b border-ink-950/10 font-bold text-ink-950">Careers</a>
+    <a href="{% url 'contact' %}" class="block py-4 border-b border-ink-950/10 font-bold text-ink-950">Contact</a>
+    <a href="{% url 'report_fraud' %}" class="mt-6 inline-flex w-full items-center justify-center px-5 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 rounded-xl">Get Help Now</a>
+  </nav>
+</div>

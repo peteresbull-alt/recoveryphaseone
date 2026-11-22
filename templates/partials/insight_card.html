@@ -1,0 +1,19 @@
+{% comment %}Usage: {% include 'partials/insight_card.html' with insight=item %}{% endcomment %}
+<a href="{% url 'insight_detail' insight.slug %}" class="group block bg-white border border-ink-950/10 rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300" {% if insight.category %}data-insight-category="{{ insight.category }}"{% endif %}>
+  <div class="aspect-[16/10] overflow-hidden bg-ink-950/5">
+    <img src="{{ insight.image }}" alt="" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+  </div>
+  <div class="p-6">
+    <div class="flex items-center gap-2 mb-3">
+      <span class="text-[11px] font-bold uppercase tracking-wider text-cargo-700">{{ insight.category }}</span>
+      {% if insight.illustrative %}<span class="text-[11px] font-semibold text-ink-950/35">· Illustrative example</span>{% endif %}
+    </div>
+    <h3 class="font-display text-lg font-bold text-ink-950 leading-snug mb-2 group-hover:text-cargo-700 transition-colors">{{ insight.title }}</h3>
+    <p class="text-sm text-ink-950/55 leading-relaxed line-clamp-3">{{ insight.excerpt }}</p>
+    <div class="flex items-center gap-3 mt-4 text-xs text-ink-950/40">
+      <span>{{ insight.date|date:"M d, Y" }}</span>
+      <span aria-hidden="true">&middot;</span>
+      <span>{{ insight.read_time }}</span>
+    </div>
+  </div>
+</a>

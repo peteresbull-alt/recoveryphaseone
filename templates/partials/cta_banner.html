@@ -1,0 +1,18 @@
+{% comment %}
+Usage: {% include 'partials/cta_banner.html' with heading="..." body="..." primary_label="..." primary_url="..." %}
+{% endcomment %}
+<section class="bg-ink-950 py-20 lg:py-24 px-6 lg:px-10 relative overflow-hidden">
+  <div class="absolute inset-0 dot-pattern pointer-events-none"></div>
+  <div class="max-w-3xl mx-auto text-center relative z-10">
+    <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-5 reveal">{{ heading|default:"Not sure where to start? We can help." }}</h2>
+    <p class="text-white/55 text-lg mb-9 reveal delay-100">{{ body|default:"A free, confidential case review is the fastest way to understand your options." }}</p>
+    <div class="flex flex-wrap items-center justify-center gap-4 reveal delay-200">
+      <a href="{{ primary_url|default:'/report-a-fraud/' }}" class="inline-flex items-center px-8 py-4 text-base font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-all">
+        {{ primary_label|default:"Start a Free Case Review" }}
+      </a>
+      <a href="{% url 'contact' %}" class="inline-flex items-center px-8 py-4 text-base font-bold text-white border border-white/25 hover:border-white/50 rounded-xl transition-all">
+        Talk to Our Team
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us · Vaultreck{% endblock %}
+{% block og_title %}About Us · Vaultreck{% endblock %}
+{% block og_description %}Vaultreck is a fund recovery and financial investigations firm built on rigorous investigation, discretion and lawful recovery action.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto max-w-3xl">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">About Vaultreck</p>
+    <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">Rigorous investigation. Lawful recovery. Real discretion.</h1>
+    <p class="text-white/60 text-lg leading-relaxed">
+      Vaultreck was founded to give fraud victims — individuals and institutions alike — access to
+      the same calibre of financial investigation historically reserved for large corporate matters.
+    </p>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1000px] mx-auto grid lg:grid-cols-2 gap-14">
+    <div>
+      <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">Our Mission</p>
+      <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-5 leading-tight">Every victim of fraud deserves a rigorous, honest investigation.</h2>
+      <p class="text-ink-950/60 leading-relaxed">
+        Fraud recovery is often inaccessible or exploited by bad actors preying on people who have
+        already lost money. We exist to change that — combining investigative rigor with honest,
+        realistic communication at every step.
+      </p>
+    </div>
+    <div>
+      <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">Our Approach</p>
+      <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-5 leading-tight">Evidence-led, institutionally coordinated, never overpromised.</h2>
+      <p class="text-ink-950/60 leading-relaxed">
+        We build every case on verifiable financial and blockchain evidence, work directly with the
+        banks, exchanges, law firms and law enforcement bodies positioned to act, and we are always
+        honest about what is and isn't realistically achievable.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-ink-950/[0.02]">
+  <div class="max-w-[1400px] mx-auto">
+    <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4 text-center">Our Values</p>
+    <h2 class="text-3xl font-display font-bold text-ink-950 mb-14 text-center">What guides our work</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mb-5">
+          <i class="ph-duotone ph-magnifying-glass text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 mb-2">Rigor</h3>
+        <p class="text-sm text-ink-950/55 leading-relaxed">Every finding is built on verifiable evidence, not assumption.</p>
+      </div>
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mb-5">
+          <i class="ph-duotone ph-lock-key text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 mb-2">Discretion</h3>
+        <p class="text-sm text-ink-950/55 leading-relaxed">Every case is handled in strict confidence, with sensitivity to what clients are going through.</p>
+      </div>
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mb-5">
+          <i class="ph-duotone ph-scales text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 mb-2">Lawfulness</h3>
+        <p class="text-sm text-ink-950/55 leading-relaxed">We pursue recovery exclusively through legitimate institutional and legal channels.</p>
+      </div>
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mb-5">
+          <i class="ph-duotone ph-chats text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 mb-2">Honesty</h3>
+        <p class="text-sm text-ink-950/55 leading-relaxed">We never promise outcomes we cannot control, and we say so clearly, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto">
+    <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">Leadership</p>
+    <h2 class="text-3xl font-display font-bold text-ink-950 mb-12">Our leadership team</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {% for member in team %}
+      <div>
+        <div class="aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-ink-950/5">
+          <img src="{{ member.photo }}" alt="" loading="lazy" class="w-full h-full object-cover grayscale" />
+        </div>
+        <h3 class="font-bold text-ink-950">{{ member.name }}</h3>
+        <p class="text-sm text-cargo-700 font-semibold mb-2">{{ member.role }}</p>
+        <p class="text-xs text-ink-950/50 leading-relaxed">{{ member.bio }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL PRESENCE -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-ink-950 text-white">
+  <div class="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-14 items-center">
+    <div>
+      <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Global Presence</p>
+      <h2 class="text-3xl lg:text-4xl font-display font-bold leading-tight mb-6">Investigation that follows funds across borders.</h2>
+      <p class="text-white/60 leading-relaxed mb-8">
+        Fraud rarely respects jurisdiction. Our team and network of local partners allow us to
+        investigate and coordinate recovery action across multiple countries and legal systems.
+      </p>
+      <div class="space-y-4">
+        {% for office in offices %}
+        <div class="flex items-center gap-3 border-b border-white/10 pb-4">
+          <i class="ph-duotone ph-map-pin text-xl text-cargo-400" aria-hidden="true"></i>
+          <span class="font-semibold">{{ office.city }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80"
+           alt="World map-style satellite view of Earth at night, illustrating global connectivity" loading="lazy" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE & ETHICS -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1000px] mx-auto">
+    <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">Compliance &amp; Ethics</p>
+    <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950 mb-6">Operating within the law, always.</h2>
+    <p class="text-ink-950/60 leading-relaxed mb-4">
+      Vaultreck operates exclusively through lawful investigative methods and coordinates with
+      licensed institutions, regulated exchanges, qualified legal counsel and law enforcement bodies.
+      We do not engage in self-help recovery, unauthorised account access, or any activity outside
+      the law in any jurisdiction in which we operate.
+    </p>
+    <p class="text-ink-950/60 leading-relaxed">
+      Full details of our regulatory registrations, licensing and professional affiliations are set
+      out in the footer of this website and are available on request.
+    </p>
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}

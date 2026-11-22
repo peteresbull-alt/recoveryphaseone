@@ -1,0 +1,30 @@
+<div id="cookie-banner" class="hidden fixed bottom-0 inset-x-0 z-[70] bg-ink-950 text-white border-t border-white/10" role="dialog" aria-label="Cookie consent" aria-describedby="cookie-banner-desc">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-5">
+    <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
+      <p id="cookie-banner-desc" class="text-sm text-white/70 flex-1">
+        We use cookies to operate this site and, with your consent, to understand how it is used.
+        See our <a href="{% url 'legal_page' 'cookie-policy' %}" class="underline hover:text-cargo-400">Cookie Policy</a> for details.
+      </p>
+      <div class="flex flex-wrap items-center gap-3 flex-shrink-0">
+        <button type="button" id="cookie-settings-toggle" class="px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-white border border-white/20 rounded-xl transition-colors">Settings</button>
+        <button type="button" id="cookie-reject" class="px-4 py-2.5 text-sm font-semibold text-white/80 hover:text-white border border-white/20 rounded-xl transition-colors">Reject non-essential</button>
+        <button type="button" id="cookie-accept" class="px-5 py-2.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">Accept</button>
+      </div>
+    </div>
+    <div id="cookie-settings-panel" class="hidden mt-5 pt-5 border-t border-white/10 grid sm:grid-cols-3 gap-4 text-sm">
+      <div class="flex items-start gap-2">
+        <input type="checkbox" checked disabled class="mt-1" id="cookie-essential" />
+        <label for="cookie-essential" class="text-white/70">Strictly necessary <span class="block text-xs text-white/40">Always on — required for the site to function.</span></label>
+      </div>
+      <div class="flex items-start gap-2">
+        <input type="checkbox" id="cookie-analytics" class="mt-1" />
+        <label for="cookie-analytics" class="text-white/70">Analytics <span class="block text-xs text-white/40">Helps us understand site usage.</span></label>
+      </div>
+      <div class="flex items-start gap-2">
+        <input type="checkbox" id="cookie-preferences" class="mt-1" />
+        <label for="cookie-preferences" class="text-white/70">Preferences <span class="block text-xs text-white/40">Remembers your settings.</span></label>
+      </div>
+      <button type="button" id="cookie-settings-save" class="sm:col-span-3 inline-flex items-center justify-center px-5 py-2.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors w-full sm:w-auto">Save settings</button>
+    </div>
+  </div>
+</div>

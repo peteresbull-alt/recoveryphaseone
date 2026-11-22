@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Insights · Vaultreck{% endblock %}
+{% block og_title %}Insights · Vaultreck{% endblock %}
+{% block og_description %}Articles, reports, scam alerts and illustrative case studies from Vaultreck's fraud investigation team.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto max-w-3xl">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Insights</p>
+    <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">Fraud intelligence, explained clearly.</h1>
+    <p class="text-white/60 text-lg leading-relaxed">
+      Articles, reports, scam alerts and illustrative case studies from our investigation team.
+    </p>
+  </div>
+</section>
+
+{% include 'partials/news_alerts.html' with news_alerts=news_alerts %}
+
+<section class="py-16 lg:py-20 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto">
+    <div id="insights-filter" class="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter insights by category">
+      <button type="button" data-filter="all" class="px-4 py-2 text-sm font-semibold rounded-xl transition-colors {% if not selected_category %}bg-ink-950 text-white{% else %}bg-transparent text-ink-950 border border-ink-950/15{% endif %}">All</button>
+      {% for category in categories %}
+      <button type="button" data-filter="{{ category }}" class="px-4 py-2 text-sm font-semibold rounded-xl border border-ink-950/15 transition-colors {% if selected_category == category %}bg-ink-950 text-white{% else %}bg-transparent text-ink-950{% endif %}">{{ category }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for insight in insights %}
+      {% include 'partials/insight_card.html' with insight=insight %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Pre-apply a category filter from ?category= query param on load.
+  document.addEventListener('DOMContentLoaded', function () {
+    var params = new URLSearchParams(window.location.search);
+    var category = params.get('category');
+    if (category) {
+      var btn = document.querySelector('#insights-filter [data-filter="' + CSS.escape(category) + '"]');
+      if (btn) btn.click();
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Careers · Vaultreck{% endblock %}
+{% block og_title %}Careers · Vaultreck{% endblock %}
+{% block og_description %}Join Vaultreck's fraud investigation and fund recovery team.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto max-w-3xl">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Careers</p>
+    <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">Work that matters, for people who need it.</h1>
+    <p class="text-white/60 text-lg leading-relaxed">
+      We're building a team of investigators, analysts and specialists who care about doing
+      meticulous, meaningful work for people navigating one of the hardest financial experiences
+      of their lives.
+    </p>
+  </div>
+</section>
+
+<!-- CULTURE -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-14 items-center">
+    <div>
+      <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">Our Culture</p>
+      <h2 class="text-3xl font-display font-bold text-ink-950 mb-6 leading-tight">Rigorous work, supportive team.</h2>
+      <p class="text-ink-950/60 leading-relaxed mb-4">
+        Our work is detail-heavy and often emotionally weighty — we take care to support each other
+        through it. Investigators collaborate closely across disciplines, from blockchain analysis
+        to traditional banking fraud, sharing knowledge as fraud techniques evolve.
+      </p>
+      <p class="text-ink-950/60 leading-relaxed">
+        Most roles work on a hybrid basis, balancing focused independent casework with regular
+        in-person collaboration. We invest heavily in training as fraud techniques evolve, and
+        every new hire is paired with a senior investigator during onboarding.
+      </p>
+    </div>
+    <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80"
+           alt="Team of professionals collaborating around a table with laptops and documents" loading="lazy" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-ink-950/[0.02]">
+  <div class="max-w-[1400px] mx-auto">
+    <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4 text-center">Benefits</p>
+    <h2 class="text-3xl font-display font-bold text-ink-950 mb-14 text-center">Why join Vaultreck</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7 text-center">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mx-auto mb-4">
+          <i class="ph-duotone ph-heartbeat text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 text-sm">Health Coverage</h3>
+      </div>
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7 text-center">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mx-auto mb-4">
+          <i class="ph-duotone ph-house-line text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 text-sm">Remote Flexibility</h3>
+      </div>
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7 text-center">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mx-auto mb-4">
+          <i class="ph-duotone ph-graduation-cap text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 text-sm">Learning Budget</h3>
+      </div>
+      <div class="bg-white border border-ink-950/10 rounded-2xl p-7 text-center">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center mx-auto mb-4">
+          <i class="ph-duotone ph-umbrella text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 text-sm">Paid Time Off</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1000px] mx-auto">
+    <h2 class="text-3xl font-display font-bold text-ink-950 mb-3">Open Positions</h2>
+    <p class="text-ink-950/50 text-sm mb-10">Current openings across our investigations and operations teams.</p>
+    <div class="divide-y divide-ink-950/10 border-t border-b border-ink-950/10">
+      {% for role in roles %}
+      <div class="flex flex-wrap items-center justify-between gap-4 py-5">
+        <div>
+          <h3 class="font-bold text-ink-950">{{ role.title }}</h3>
+          <p class="text-sm text-ink-950/50">{{ role.location }} &middot; {{ role.type }}</p>
+        </div>
+        <a href="{% url 'contact' %}" class="inline-flex items-center px-5 py-2.5 text-sm font-bold text-ink-950 border border-ink-950/20 hover:border-cargo-500 hover:text-cargo-700 rounded-xl transition-colors">Apply <i class="ph-duotone ph-arrow-right ml-2 text-xs" aria-hidden="true"></i></a>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="text-sm text-ink-950/50 mt-8">Don't see the right role? <a href="{% url 'contact' %}" class="font-bold text-cargo-700 hover:text-cargo-600">Get in touch</a> — we're always interested in hearing from experienced investigators and analysts.</p>
+  </div>
+</section>
+
+{% endblock %}

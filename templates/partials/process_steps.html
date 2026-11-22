@@ -1,0 +1,11 @@
+{% comment %}Usage: {% include 'partials/process_steps.html' with steps=how_it_works %}{% endcomment %}
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
+  {% for item in steps %}
+  <div class="relative reveal {% cycle '' 'delay-100' 'delay-200' 'delay-300' %}">
+    {% if not forloop.last %}<div class="step-connector"></div>{% endif %}
+    <span class="font-display text-5xl font-bold text-ink-950/10 block mb-3">{% if item.step %}{{ item.step }}{% else %}{{ forloop.counter|stringformat:"02d" }}{% endif %}</span>
+    <h3 class="text-lg font-bold text-ink-950 mb-2">{{ item.title }}</h3>
+    <p class="text-sm text-ink-950/55 leading-relaxed">{{ item.description }}</p>
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}Vaultreck — Trace. Recover. Restore.{% endblock %}
+{% block og_title %}Vaultreck — Trace. Recover. Restore.{% endblock %}
+{% block og_description %}Vaultreck helps people and businesses trace and recover money lost to investment scams, crypto fraud, romance scams and payment fraud through lawful investigation.{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="relative min-h-[640px] flex items-end">
+  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80"
+       alt="City skyline at dusk, representing the global reach of financial investigation work"
+       class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+  <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/80 to-ink-950/40"></div>
+  <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 pt-40 pb-20 w-full">
+    <div class="max-w-2xl">
+      <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-5 reveal">Fund Recovery &amp; Financial Investigations</p>
+      <h1 class="text-5xl lg:text-7xl font-display font-bold text-white leading-[1.05] mb-6 reveal delay-100">Trace. Recover. Restore.</h1>
+      <p class="text-lg text-white/70 leading-relaxed mb-10 max-w-xl reveal delay-200">
+        We help individuals, families and businesses trace money lost to investment scams, crypto
+        fraud, romance scams and payment fraud — and pursue recovery through lawful, coordinated
+        investigation.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 reveal delay-300">
+        <a href="{% url 'report_fraud' %}" class="inline-flex items-center px-8 py-4 text-base font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">
+          Start a Free Case Review
+        </a>
+        <a href="{% url 'services' %}" class="inline-flex items-center px-8 py-4 text-base font-bold text-white border border-white/30 hover:border-white/60 rounded-xl transition-colors">
+          Our Services
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include 'partials/news_alerts.html' with news_alerts=news_alerts show_view_all=True %}
+
+<!-- FEATURED INSIGHTS STRIP -->
+<section class="py-16 lg:py-20 px-6 lg:px-10 bg-white border-b border-ink-950/10">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="flex items-end justify-between mb-8">
+      <h2 class="text-2xl font-display font-bold text-ink-950">Featured Insights</h2>
+      <a href="{% url 'insights' %}" class="text-sm font-bold text-cargo-700 hover:text-cargo-600 hidden sm:inline-flex items-center">View all <i class="ph-duotone ph-arrow-right ml-1.5 text-xs" aria-hidden="true"></i></a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {% for insight in featured_insights %}
+      {% include 'partials/insight_card.html' with insight=insight %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="py-20 lg:py-28 px-6 lg:px-10 bg-ink-950/[0.02]">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="max-w-2xl mb-14">
+      <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">What We Do</p>
+      <h2 class="text-3xl lg:text-5xl font-display font-bold text-ink-950 leading-tight">Investigation and tracing across every major fraud type.</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for service in services %}
+      <a href="{% url 'service_detail' service.slug %}" class="group bg-white border border-ink-950/10 rounded-2xl p-7 hover:border-cargo-500/40 hover:shadow-lg transition-all duration-300">
+        <div class="w-16 h-16 rounded-xl bg-ink-950/[0.04] group-hover:bg-cargo-500/15 flex items-center justify-center mb-5 transition-colors">
+          <i class="ph-duotone ph-{{ service.icon }} text-3xl text-ink-700 group-hover:text-cargo-600 transition-colors" aria-hidden="true"></i>
+        </div>
+        <h3 class="font-bold text-ink-950 mb-2 group-hover:text-cargo-700 transition-colors">{{ service.name }}</h3>
+        <p class="text-sm text-ink-950/55 leading-relaxed mb-4">{{ service.summary }}</p>
+        <span class="text-sm font-bold text-cargo-700 inline-flex items-center">Learn more <i class="ph-duotone ph-arrow-right ml-1.5 text-xs transition-transform group-hover:translate-x-1" aria-hidden="true"></i></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+{% include 'partials/stats_band.html' %}
+
+<!-- HOW IT WORKS -->
+<section class="py-20 lg:py-28 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="max-w-2xl mb-16">
+      <p class="text-xs font-bold text-cargo-700 uppercase tracking-widest mb-4">How It Works</p>
+      <h2 class="text-3xl lg:text-5xl font-display font-bold text-ink-950 leading-tight">A clear, structured process from first contact to resolution.</h2>
+    </div>
+    {% include 'partials/process_steps.html' with steps=how_it_works %}
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="py-20 lg:py-28 px-6 lg:px-10 bg-ink-950 text-white">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-14">
+      <div class="max-w-xl">
+        <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Industries Served</p>
+        <h2 class="text-3xl lg:text-5xl font-display font-bold leading-tight">Trusted by individuals and institutions alike.</h2>
+      </div>
+      <a href="{% url 'industries' %}" class="text-sm font-bold text-cargo-400 hover:text-cargo-300 inline-flex items-center">View all industries <i class="ph-duotone ph-arrow-right ml-1.5 text-xs" aria-hidden="true"></i></a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for industry in industries %}
+      <a href="{% url 'industry_detail' industry.slug %}" class="group flex items-center gap-4 p-6 border border-white/10 rounded-2xl hover:border-cargo-400/50 hover:bg-white/[0.03] transition-all">
+        <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center flex-shrink-0 group-hover:bg-cargo-500/20 transition-colors">
+          <i class="ph-duotone ph-{{ industry.icon }} text-2xl text-cargo-400" aria-hidden="true"></i>
+        </div>
+        <span class="font-bold">{{ industry.name }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- LATEST INSIGHTS -->
+<section class="py-20 lg:py-28 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="flex items-end justify-between mb-10">
+      <h2 class="text-3xl font-display font-bold text-ink-950">Latest Insights</h2>
+      <a href="{% url 'insights' %}" class="text-sm font-bold text-cargo-700 hover:text-cargo-600 hidden sm:inline-flex items-center">View all <i class="ph-duotone ph-arrow-right ml-1.5 text-xs" aria-hidden="true"></i></a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for insight in latest_insights %}
+      {% include 'partials/insight_card.html' with insight=insight %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SPOT A RECOVERY SCAM -->
+<section class="py-20 lg:py-28 px-6 lg:px-10 bg-ink-950/[0.03] border-y border-ink-950/10">
+  <div class="max-w-4xl mx-auto">
+    <div class="bg-white border-2 border-cargo-500/30 rounded-2xl p-8 lg:p-12">
+      <div class="flex items-center gap-4 mb-5">
+        <div class="w-14 h-14 rounded-xl bg-cargo-500/10 flex items-center justify-center flex-shrink-0">
+          <i class="ph-duotone ph-shield-check text-3xl text-cargo-600" aria-hidden="true"></i>
+        </div>
+        <h2 class="text-2xl lg:text-3xl font-display font-bold text-ink-950">Spot a Recovery Scam</h2>
+      </div>
+      <p class="text-ink-950/65 leading-relaxed mb-6">
+        Fraud victims are often targeted a second time by people posing as recovery experts. Protect
+        yourself by knowing what a legitimate firm will never do.
+      </p>
+      <ul class="space-y-3 mb-2">
+        <li class="flex items-start gap-3">
+          <i class="ph-duotone ph-x-circle text-red-600 text-lg mt-0.5" aria-hidden="true"></i>
+          <span class="text-ink-950/75"><strong class="text-ink-950">We never guarantee recovery.</strong> No legitimate firm can promise an outcome.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <i class="ph-duotone ph-x-circle text-red-600 text-lg mt-0.5" aria-hidden="true"></i>
+          <span class="text-ink-950/75"><strong class="text-ink-950">We never ask for upfront payment in cryptocurrency or gift cards.</strong></span>
+        </li>
+        <li class="flex items-start gap-3">
+          <i class="ph-duotone ph-x-circle text-red-600 text-lg mt-0.5" aria-hidden="true"></i>
+          <span class="text-ink-950/75"><strong class="text-ink-950">We never contact victims unsolicited</strong> claiming to have located their funds.</span>
+        </li>
+      </ul>
+      <a href="{% url 'legal_page' 'disclaimer' %}" class="text-sm font-bold text-cargo-700 hover:text-cargo-600 inline-flex items-center mt-4">Read our full disclaimer <i class="ph-duotone ph-arrow-right ml-1.5 text-xs" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}

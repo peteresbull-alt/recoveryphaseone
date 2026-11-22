@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Frequently Asked Questions · Vaultreck{% endblock %}
+{% block og_title %}Frequently Asked Questions · Vaultreck{% endblock %}
+{% block og_description %}Answers to common questions about Vaultreck's fund recovery and financial investigation process.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto max-w-3xl">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">FAQ</p>
+    <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">Frequently Asked Questions</h1>
+    <p class="text-white/60 text-lg leading-relaxed">Straight answers to the questions we hear most often.</p>
+  </div>
+</section>
+
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[800px] mx-auto">
+    {% include 'partials/accordion.html' with faqs=faqs %}
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}

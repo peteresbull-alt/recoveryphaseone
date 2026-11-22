@@ -1,0 +1,15 @@
+<nav aria-label="Breadcrumb" class="bg-ink-950/[0.03] border-b border-ink-950/10">
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10 py-3">
+    <ol class="flex flex-wrap items-center gap-2 text-xs text-ink-950/50">
+      <li><a href="{% url 'home' %}" class="hover:text-cargo-700 transition-colors">Home</a></li>
+      {% for crumb in breadcrumbs %}
+      <li aria-hidden="true" class="text-ink-950/25">/</li>
+      {% if forloop.last %}
+      <li aria-current="page" class="font-semibold text-ink-950/80">{{ crumb.label }}</li>
+      {% else %}
+      <li><a href="{{ crumb.url }}" class="hover:text-cargo-700 transition-colors">{{ crumb.label }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>

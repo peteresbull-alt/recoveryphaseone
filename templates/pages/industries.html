@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Industries · Vaultreck{% endblock %}
+{% block og_title %}Industries · Vaultreck{% endblock %}
+{% block og_description %}Vaultreck supports individuals, financial institutions, law firms, corporates, crypto exchanges and public sector bodies with fraud investigation and recovery.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-20 lg:py-24 px-6 lg:px-10">
+  <div class="max-w-[1400px] mx-auto max-w-3xl">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Industries</p>
+    <h1 class="text-4xl lg:text-6xl font-display font-bold leading-tight mb-6">Investigation expertise tailored to every client.</h1>
+    <p class="text-white/60 text-lg leading-relaxed">
+      Whether you're an individual who has lost personal savings or an institution managing fraud
+      risk at scale, our approach is shaped around your specific needs.
+    </p>
+  </div>
+</section>
+
+<section class="py-20 lg:py-24 px-6 lg:px-10 bg-white">
+  <div class="max-w-[1400px] mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for industry in industries %}
+    <a href="{% url 'industry_detail' industry.slug %}" class="group bg-white border border-ink-950/10 rounded-2xl p-8 hover:border-cargo-500/40 hover:shadow-xl transition-all duration-300 flex flex-col">
+      <div class="w-16 h-16 rounded-xl bg-ink-950/[0.04] group-hover:bg-cargo-500/15 flex items-center justify-center mb-6 transition-colors">
+        <i class="ph-duotone ph-{{ industry.icon }} text-3xl text-ink-700 group-hover:text-cargo-600 transition-colors" aria-hidden="true"></i>
+      </div>
+      <h2 class="font-display text-xl font-bold text-ink-950 mb-3 group-hover:text-cargo-700 transition-colors">{{ industry.name }}</h2>
+      <p class="text-sm text-ink-950/55 leading-relaxed mb-6 flex-1">{{ industry.summary }}</p>
+      <span class="text-sm font-bold text-cargo-700 inline-flex items-center">Learn more <i class="ph-duotone ph-arrow-right ml-1.5 text-xs transition-transform group-hover:translate-x-1" aria-hidden="true"></i></span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% include 'partials/cta_banner.html' %}
+
+{% endblock %}

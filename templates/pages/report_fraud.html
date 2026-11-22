@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}Report a Fraud · Free Case Review · Vaultreck{% endblock %}
+{% block og_title %}Report a Fraud · Free Case Review · Vaultreck{% endblock %}
+{% block og_description %}Start a free, confidential case review with Vaultreck's fraud investigation team.{% endblock %}
+
+{% block breadcrumbs %}
+{% include 'partials/breadcrumbs.html' %}
+{% endblock %}
+
+{% block content %}
+
+<section class="bg-ink-950 text-white py-16 lg:py-20 px-6 lg:px-10">
+  <div class="max-w-[1000px] mx-auto text-center">
+    <p class="text-xs font-bold text-cargo-400 uppercase tracking-widest mb-4">Free, Confidential Case Review</p>
+    <h1 class="text-4xl lg:text-5xl font-display font-bold leading-tight mb-5">Report a Fraud</h1>
+    <p class="text-white/60 text-lg leading-relaxed max-w-xl mx-auto">
+      Tell us what happened. There is no cost for this initial review, and everything you share is
+      kept in confidence.
+    </p>
+  </div>
+</section>
+
+<section class="py-16 lg:py-20 px-6 lg:px-10 bg-white">
+  <div id="fraud-wizard" class="max-w-[720px] mx-auto">
+
+    <div id="fraud-wizard-progress" class="mb-10">
+      <div class="h-1.5 bg-ink-950/10 rounded-full mb-5 overflow-hidden">
+        <div data-progress-fill class="h-full bg-cargo-500 transition-all duration-300" style="width:0%;"></div>
+      </div>
+      <div class="flex items-center justify-between">
+        {% for label in "12345" %}
+        <div data-step-indicator class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold bg-ink-950/10 text-ink-950/40 transition-colors">{{ forloop.counter }}</div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="bg-white border border-ink-950/10 rounded-2xl p-6 sm:p-9 shadow-sm">
+    <form novalidate>
+      {% csrf_token %}
+
+      <!-- STEP 1: CONTACT DETAILS -->
+      <div data-step class="space-y-5">
+        <h2 class="text-xl font-display font-bold text-ink-950 mb-1">Step 1 of 5 — Your Contact Details</h2>
+        <p class="text-sm text-ink-950/50 mb-6">How should we reach you about your case review?</p>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="rf-name" class="block text-sm font-semibold text-ink-950 mb-2">Full Name</label>
+            <input id="rf-name" name="full_name" type="text" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+          <div>
+            <label for="rf-email" class="block text-sm font-semibold text-ink-950 mb-2">Email Address</label>
+            <input id="rf-email" name="email" type="email" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="rf-phone" class="block text-sm font-semibold text-ink-950 mb-2">Phone Number</label>
+            <input id="rf-phone" name="phone" type="tel" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+          <div>
+            <label for="rf-country" class="block text-sm font-semibold text-ink-950 mb-2">Country of Residence</label>
+            <input id="rf-country" name="country" type="text" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+        </div>
+        <div class="flex justify-end pt-4">
+          <button type="button" data-step-next class="inline-flex items-center px-7 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">Continue <i class="ph-duotone ph-arrow-right ml-2 text-xs" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 2: TYPE OF FRAUD -->
+      <div data-step class="hidden space-y-5">
+        <h2 class="text-xl font-display font-bold text-ink-950 mb-1">Step 2 of 5 — Type of Fraud</h2>
+        <p class="text-sm text-ink-950/50 mb-6">What best describes what happened?</p>
+        <div>
+          <label for="rf-fraud-type" class="block text-sm font-semibold text-ink-950 mb-2">Type of Fraud</label>
+          <select id="rf-fraud-type" name="fraud_type" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow">
+            <option value="">Select one…</option>
+            <option value="crypto">Crypto / Digital Asset Fraud</option>
+            <option value="investment">Investment or Trading Scam</option>
+            <option value="romance">Romance / Social Engineering Fraud</option>
+            <option value="wire">Wire Transfer / Payment Fraud</option>
+            <option value="corporate">Corporate / Vendor Fraud</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="rf-platform" class="block text-sm font-semibold text-ink-950 mb-2">Platform, Exchange or Institution Involved <span class="text-ink-950/35 font-normal">(if known)</span></label>
+          <input id="rf-platform" name="platform" type="text" class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+        </div>
+        <div class="flex justify-between pt-4">
+          <button type="button" data-step-prev class="inline-flex items-center px-6 py-3.5 text-sm font-bold text-ink-950 border border-ink-950/20 hover:border-ink-950/40 rounded-xl transition-colors"><i class="ph-duotone ph-arrow-left mr-2 text-xs" aria-hidden="true"></i> Back</button>
+          <button type="button" data-step-next class="inline-flex items-center px-7 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">Continue <i class="ph-duotone ph-arrow-right ml-2 text-xs" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 3: AMOUNT AND DATES -->
+      <div data-step class="hidden space-y-5">
+        <h2 class="text-xl font-display font-bold text-ink-950 mb-1">Step 3 of 5 — Amount &amp; Dates</h2>
+        <p class="text-sm text-ink-950/50 mb-6">Approximate figures are fine at this stage.</p>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="rf-amount" class="block text-sm font-semibold text-ink-950 mb-2">Approximate Amount Lost</label>
+            <input id="rf-amount" name="amount_lost" type="text" inputmode="decimal" required placeholder="e.g. 25,000" class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+          <div>
+            <label for="rf-currency" class="block text-sm font-semibold text-ink-950 mb-2">Currency</label>
+            <input id="rf-currency" name="currency" type="text" required placeholder="e.g. USD, BTC, EUR" class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="rf-date-start" class="block text-sm font-semibold text-ink-950 mb-2">First Payment Date</label>
+            <input id="rf-date-start" name="date_start" type="date" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+          <div>
+            <label for="rf-date-end" class="block text-sm font-semibold text-ink-950 mb-2">Most Recent Payment Date</label>
+            <input id="rf-date-end" name="date_end" type="date" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow" />
+          </div>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button type="button" data-step-prev class="inline-flex items-center px-6 py-3.5 text-sm font-bold text-ink-950 border border-ink-950/20 hover:border-ink-950/40 rounded-xl transition-colors"><i class="ph-duotone ph-arrow-left mr-2 text-xs" aria-hidden="true"></i> Back</button>
+          <button type="button" data-step-next class="inline-flex items-center px-7 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">Continue <i class="ph-duotone ph-arrow-right ml-2 text-xs" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 4: DESCRIPTION & FILES -->
+      <div data-step class="hidden space-y-5">
+        <h2 class="text-xl font-display font-bold text-ink-950 mb-1">Step 4 of 5 — What Happened</h2>
+        <p class="text-sm text-ink-950/50 mb-6">The more detail you can share, the faster we can assess your case.</p>
+        <div>
+          <label for="rf-description" class="block text-sm font-semibold text-ink-950 mb-2">Describe what happened</label>
+          <textarea id="rf-description" name="description" rows="6" required class="w-full rounded-xl border border-ink-950/15 bg-white text-ink-950 placeholder-ink-950/30 px-4 py-3 text-sm focus:outline-none focus:border-cargo-500 focus:ring-2 focus:ring-cargo-500/15 transition-shadow resize-none"></textarea>
+        </div>
+        <div>
+          <label for="rf-files" class="block text-sm font-semibold text-ink-950 mb-2">Supporting Documents <span class="text-ink-950/35 font-normal">(optional)</span></label>
+          <!-- PLACEHOLDER: file input has no backend wired up. Uploaded files are not
+               sent anywhere yet — wire this to a real upload endpoint before launch. -->
+          <input id="rf-files" name="files" type="file" multiple class="w-full text-sm text-ink-950/60 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-ink-950/5 file:text-ink-950 hover:file:bg-ink-950/10" />
+          <p class="text-xs text-ink-950/40 mt-2">Screenshots, transaction records, wallet addresses or correspondence, if available.</p>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button type="button" data-step-prev class="inline-flex items-center px-6 py-3.5 text-sm font-bold text-ink-950 border border-ink-950/20 hover:border-ink-950/40 rounded-xl transition-colors"><i class="ph-duotone ph-arrow-left mr-2 text-xs" aria-hidden="true"></i> Back</button>
+          <button type="button" data-step-next class="inline-flex items-center px-7 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">Continue <i class="ph-duotone ph-arrow-right ml-2 text-xs" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 5: CONSENT & SUBMIT -->
+      <div data-step class="hidden space-y-5">
+        <h2 class="text-xl font-display font-bold text-ink-950 mb-1">Step 5 of 5 — Review &amp; Consent</h2>
+        <p class="text-sm text-ink-950/50 mb-6">Almost done. Please review and confirm before submitting.</p>
+        <div class="bg-ink-950/[0.03] border border-ink-950/10 rounded-xl p-5 text-sm text-ink-950/65 leading-relaxed">
+          By submitting this form, you agree to Vaultreck's <a href="{% url 'legal_page' 'privacy-policy' %}" class="font-semibold text-cargo-700 hover:text-cargo-600">Privacy Policy</a>
+          and confirm that the information provided is accurate to the best of your knowledge. Submitting this form does not create a client
+          relationship or guarantee that Vaultreck will be able to assist with your case.
+        </div>
+        <div class="flex items-start gap-3">
+          <input id="rf-consent" name="consent" type="checkbox" required class="mt-1 w-4 h-4 rounded border-ink-950/25 text-cargo-500 focus:ring-cargo-500/40" />
+          <label for="rf-consent" class="text-sm text-ink-950/70">I have read and agree to the Privacy Policy and confirm the information provided is accurate.</label>
+        </div>
+        <div class="flex items-start gap-3 bg-cargo-500/10 border border-cargo-500/25 rounded-xl p-4">
+          <i class="ph-duotone ph-info text-cargo-700 text-lg flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+          <p class="text-xs text-ink-950/60">This submission does not guarantee recovery of any funds. We will review your case and contact you with a realistic assessment.</p>
+        </div>
+        <div class="flex justify-between pt-4">
+          <button type="button" data-step-prev class="inline-flex items-center px-6 py-3.5 text-sm font-bold text-ink-950 border border-ink-950/20 hover:border-ink-950/40 rounded-xl transition-colors"><i class="ph-duotone ph-arrow-left mr-2 text-xs" aria-hidden="true"></i> Back</button>
+          <button type="submit" class="inline-flex items-center px-7 py-3.5 text-sm font-bold text-ink-950 bg-cargo-500 hover:bg-cargo-400 rounded-xl transition-colors">Submit Case Review <i class="ph-duotone ph-paper-plane-tilt ml-2 text-xs" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </form>
+
+    <!-- CONFIRMATION SCREEN -->
+    <div id="fraud-wizard-confirmation" class="hidden text-center py-10">
+      <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+        <i class="ph-duotone ph-check text-emerald-700 text-3xl" aria-hidden="true"></i>
+      </div>
+      <h2 class="text-2xl font-display font-bold text-ink-950 mb-4">Thank you. Your case review request has been received.</h2>
+      <p class="text-ink-950/60 leading-relaxed max-w-md mx-auto mb-8">
+        A member of our team will review the information you've provided and reach out to the email
+        or phone number you gave us. We treat every submission in confidence.
+      </p>
+      <a href="{% url 'home' %}" class="inline-flex items-center px-7 py-3.5 text-sm font-bold text-ink-950 border border-ink-950/20 hover:border-ink-950/40 rounded-xl transition-colors">Back to Home</a>
+    </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
