@@ -5,11 +5,14 @@
     <title>{% block title %}Vaultreck — Fund Recovery & Financial Investigations{% endblock %}</title>
 
     <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
+    <meta name="description" content="{% block meta_description %}Vaultreck traces and pursues recovery of money lost to investment scams, crypto fraud, romance scams and payment fraud through lawful, coordinated investigation.{% endblock %}" />
     <meta property="og:site_name" content="Vaultreck" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{% block og_title %}Vaultreck — Fund Recovery & Financial Investigations{% endblock %}" />
     <meta property="og:description" content="{% block og_description %}Vaultreck traces and pursues recovery of money lost to investment scams, crypto fraud, romance scams and payment fraud through lawful, coordinated investigation.{% endblock %}" />
-    <meta property="og:image" content="{% block og_image %}https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-default.jpg' %}{% endblock %}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -39,6 +42,7 @@
 
     {% include 'partials/footer.html' %}
     {% include 'partials/cookie_banner.html' %}
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <script src="{% static 'js/site.js' %}" defer></script>
     {% include 'partials/scripts_base.html' %}

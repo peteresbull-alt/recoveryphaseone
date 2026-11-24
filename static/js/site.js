@@ -200,4 +200,38 @@
       });
     });
   }
+
+  // ---------------------------------------------------------------------
+  // Toast notifications — window.showToast(message, type)
+  // type: 'success' (default) | 'error'
+  // ---------------------------------------------------------------------
+  var toastIcons = {
+    success: { icon: 'ph-check-circle', color: 'text-emerald-600' },
+    error: { icon: 'ph-warning-circle', color: 'text-red-600' },
+  };
+  window.showToast = function (message, type) {
+    var container = document.getElementById('toast-container');
+    if (!container) return;
+    var variant = toastIcons[type] || toastIcons.success;
+
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML =
+      '<i class="ph-duotone ' + variant.icon + ' text-2xl ' + variant.color + ' flex-shrink-0" aria-hidden="true"></i>' +
+      '<p class="text-sm font-semibold text-ink-950 pt-0.5"></p>' +
+      '<button type="button" aria-label="Dismiss" class="ml-auto text-ink-950/30 hover:text-ink-950/60 flex-shrink-0">' +
+      '<i class="ph-duotone ph-x text-lg" aria-hidden="true"></i></button>';
+    toast.querySelector('p').textContent = message;
+    container.appendChild(toast);
+
+    requestAnimationFrame(function () { toast.classList.add('toast-visible'); });
+
+    var dismiss = function () {
+      toast.classList.remove('toast-visible');
+      setTimeout(function () { toast.remove(); }, 300);
+    };
+    toast.querySelector('button').addEventListener('click', dismiss);
+    setTimeout(dismiss, 5000);
+  };
 })();

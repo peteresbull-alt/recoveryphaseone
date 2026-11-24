@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_GET
 
 from . import content
+from .models import ContactSubmission
 from .news_feed import get_fraud_news_alerts
 
 
@@ -136,9 +137,22 @@ def careers(request):
 
 
 def contact(request):
+    submitted = False
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        subject = request.POST.get('subject', '').strip()
+        message = request.POST.get('message', '').strip()
+        consent = bool(request.POST.get('consent'))
+        if name and email and subject and message and consent:
+            ContactSubmission.objects.create(
+                name=name, email=email, subject=subject, message=message, consent=consent,
+            )
+            submitted = True
     return render(request, 'pages/contact.html', {
         'title': 'Contact Us · Vaultreck',
         'breadcrumbs': [{'label': 'Contact'}],
+        'submitted': submitted,
     })
 
 
